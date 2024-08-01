@@ -1,3 +1,4 @@
+import assert from 'node:assert';
 import Ajv from 'ajv';
 import request, { getSocketConnect } from '@quanxiaoxiao/http-request';
 import {
@@ -26,6 +27,7 @@ export default (options, actionName, index) => {
         port,
         path,
       } = parseHttpUrl(template(options.url)(ctx));
+      assert(protocol === 'http:' || protocol === 'https:');
       const requestOptions = {
         path,
         method: options.method,
