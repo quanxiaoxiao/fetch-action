@@ -38,3 +38,5 @@ export default (providers) => {
     },
   }), {});
 };
+
+export const fetchAction = createActionFn;

@@ -12,7 +12,7 @@ import schema from './schema.mjs';
 export default (options, actionName, index) => {
   const operationValidate = (new Ajv()).compile(schema);
   if (!operationValidate(options)) {
-    throw new Error(`\`${actionName}[${index}]\` \`${JSON.stringify(operationValidate.errors)}\``);
+    throw new Error(actionName ? `\`${actionName}[${index}]\` \`${JSON.stringify(operationValidate.errors)}\`` : JSON.stringify(operationValidate.errors));
   }
   const requestBodySelect = options.body ? select(options.body) : null;
   const responseBodyValidate = options.validate ? (new Ajv().compile(options.validate)) : null;
@@ -74,7 +74,7 @@ export default (options, actionName, index) => {
       }
       return responseData;
     } catch (error) {
-      throw new Error(`\`${actionName}[${index}]\`\n${error.message}`);
+      throw new Error(actionName ? `\`${actionName}[${index}]\`\n${error.message}` : error.message);
     }
   };
 };
