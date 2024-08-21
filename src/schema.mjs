@@ -6,7 +6,6 @@ export default {
     },
     url: {
       type: 'string',
-      pattern: '^https?://.+',
     },
     method: {
       enum: ['GET', 'POST', 'DELETE', 'PUT'],
