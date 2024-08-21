@@ -1,11 +1,18 @@
 export default {
   type: 'object',
   properties: {
+    debug: {
+      type: 'boolean',
+    },
     url: {
       type: 'string',
+      pattern: '^https?://.+',
     },
     method: {
       enum: ['GET', 'POST', 'DELETE', 'PUT'],
+    },
+    rejectUnauthorized: {
+      type: 'boolean',
     },
     validate: {
       type: 'object',

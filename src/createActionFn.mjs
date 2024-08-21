@@ -1,6 +1,5 @@
-import assert from 'node:assert';
 import Ajv from 'ajv';
-import request, { getSocketConnect } from '@quanxiaoxiao/http-request';
+import request from '@quanxiaoxiao/http-request';
 import {
   parseHttpUrl,
   decodeContentToJSON,
@@ -27,7 +26,6 @@ export default (options, actionName, index) => {
         port,
         path,
       } = parseHttpUrl(template(options.url)(ctx));
-      assert(protocol === 'http:' || protocol === 'https:');
       const requestOptions = {
         path,
         method: options.method,
@@ -56,11 +54,14 @@ export default (options, actionName, index) => {
             bufList.push(chunk);
           },
         },
-        () => getSocketConnect({
+        {
           protocol,
           hostname,
           port,
-        }),
+          ...options.rejectUnauthorized !== null ? {
+            rejectUnauthorized: options.rejectUnauthorized,
+          } : {},
+        },
       );
       if (responseItem.statusCode !== 200) {
         throw new Error(Buffer.concat(bufList).toString());
