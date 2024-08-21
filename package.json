@@ -1,6 +1,6 @@
 {
   "name": "@quanxiaoxiao/fetch-action",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "type": "module",
   "main": "./src/index.mjs",
   "exports": {
@@ -23,8 +23,8 @@
   },
   "dependencies": {
     "@quanxiaoxiao/datav": "^0.3.2",
-    "@quanxiaoxiao/http-request": "^0.48.0",
-    "@quanxiaoxiao/http-utils": "^0.24.0",
+    "@quanxiaoxiao/http-request": "^0.52.0",
+    "@quanxiaoxiao/http-utils": "^0.25.0",
     "@quanxiaoxiao/utils": "^0.11.0",
     "ajv": "^8.17.1"
   }
