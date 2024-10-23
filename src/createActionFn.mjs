@@ -49,9 +49,15 @@ export default (options, actionName, index) => {
           ...requestOptions,
           onChunkIncoming: (chunk) => {
             bufList.push(chunk);
+            if (options.debug) {
+              console.log(chunk.toString());
+            }
           },
           onChunkOutgoing: (chunk) => {
             bufList.push(chunk);
+            if (options.debug) {
+              console.log(chunk.toString());
+            }
           },
         },
         {
@@ -63,7 +69,7 @@ export default (options, actionName, index) => {
           } : {},
         },
       );
-      if (responseItem.statusCode !== 200) {
+      if (options.onlyStatusCodeOfOk !== false && responseItem.statusCode !== 200) {
         throw new Error(Buffer.concat(bufList).toString());
       }
       const responseData = decodeContentToJSON(responseItem.body, responseItem.headers);

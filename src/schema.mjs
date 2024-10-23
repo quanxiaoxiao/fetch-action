@@ -4,6 +4,9 @@ export default {
     debug: {
       type: 'boolean',
     },
+    onlyStatusCodeOfOk: {
+      type: 'boolean',
+    },
     url: {
       type: 'string',
     },
