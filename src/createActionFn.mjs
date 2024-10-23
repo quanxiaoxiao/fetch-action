@@ -79,6 +79,9 @@ export default (options, actionName, index) => {
       if (responseBodySelect) {
         return responseBodySelect(responseData);
       }
+      if (responseData == null && responseItem.body != null) {
+        return responseItem.body.toString();
+      }
       return responseData;
     } catch (error) {
       throw new Error(actionName ? `\`${actionName}[${index}]\`\n${error.message}` : error.message);
