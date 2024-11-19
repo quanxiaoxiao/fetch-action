@@ -4,7 +4,7 @@ export default {
     debug: {
       type: 'boolean',
     },
-    onlyStatusCodeOfOk: {
+    onlyStatusCodeWithOk: {
       type: 'boolean',
     },
     url: {
@@ -56,5 +56,5 @@ export default {
     },
   },
   required: ['url'],
-  additionalProperties: false,
+  additionalProperties: true,
 };

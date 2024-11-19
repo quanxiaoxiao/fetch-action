@@ -23,7 +23,7 @@ export const fetchActions = (arr, actionName) => {
 export default (providers) => {
   const actionNames = Object.keys(providers);
 
-  const result = [];
+  const actionList = [];
 
   for (let i = 0; i < actionNames.length; i++) {
     const actionName = actionNames[i];
@@ -31,10 +31,10 @@ export default (providers) => {
       name: actionName,
       pipeline: providers[actionName],
     };
-    result.push(op);
+    actionList.push(op);
   }
 
-  return result.reduce((acc, cur) => ({
+  return actionList.reduce((acc, cur) => ({
     ...acc,
     [cur.name]: (ctx = {}) => fetchActions(cur.pipeline, cur.name)(ctx),
   }), {});

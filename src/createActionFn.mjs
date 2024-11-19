@@ -3,6 +3,7 @@ import request from '@quanxiaoxiao/http-request';
 import {
   parseHttpUrl,
   decodeContentToJSON,
+  parseHttpPath,
 } from '@quanxiaoxiao/http-utils';
 import { template } from '@quanxiaoxiao/utils';
 import { select } from '@quanxiaoxiao/datav';
@@ -26,9 +27,9 @@ export default (options, actionName, index) => {
         port,
         path,
       } = parseHttpUrl(template(options.url)(ctx));
-      const requestOptions = {
+      let requestOptions = {
         path,
-        method: options.method,
+        method: options.method || 'GET',
         headers: options.headers || {},
       };
       requestOptions.headers = headerKeys.reduce((acc, key) => ({
@@ -44,6 +45,18 @@ export default (options, actionName, index) => {
         requestOptions.body = JSON.stringify(requestBodySelect(ctx));
       }
       const bufList = [];
+      if (options.onRequest) {
+        const [httpPathname, httpQuerystring, httpQuery] = parseHttpPath(path);
+        const ret = options.onRequest({
+          ...requestOptions,
+          pathname: httpPathname,
+          querystring: httpQuerystring,
+          query: httpQuery,
+        });
+        if (ret) {
+          requestOptions = ret;
+        }
+      }
       const responseItem = await request(
         {
           ...requestOptions,
@@ -69,7 +82,7 @@ export default (options, actionName, index) => {
           } : {},
         },
       );
-      if (options.onlyStatusCodeOfOk !== false && responseItem.statusCode !== 200) {
+      if (options.onlyStatusCodeWithOk !== false && responseItem.statusCode !== 200) {
         throw new Error(Buffer.concat(bufList).toString());
       }
       const responseData = decodeContentToJSON(responseItem.body, responseItem.headers);
