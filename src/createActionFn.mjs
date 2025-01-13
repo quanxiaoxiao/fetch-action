@@ -1,12 +1,13 @@
-import Ajv from 'ajv';
+import { select } from '@quanxiaoxiao/datav';
 import request from '@quanxiaoxiao/http-request';
 import {
-  parseHttpUrl,
   decodeContentToJSON,
   parseHttpPath,
+  parseHttpUrl,
 } from '@quanxiaoxiao/http-utils';
 import { template } from '@quanxiaoxiao/utils';
-import { select } from '@quanxiaoxiao/datav';
+import Ajv from 'ajv';
+
 import schema from './schema.mjs';
 
 export default (options, actionName, index) => {
