@@ -1,6 +1,6 @@
 {
   "name": "@quanxiaoxiao/fetch-action",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "type": "module",
   "main": "./src/index.mjs",
   "exports": {
@@ -14,19 +14,19 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@eslint/js": "^9.7.0",
-    "eslint": "^9.7.0",
+    "@eslint/js": "^9.22.0",
+    "eslint": "^9.22.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "globals": "^15.8.0"
+    "globals": "^15.15.0"
   },
   "engines": {
     "node": ">= 20.0.0"
   },
   "dependencies": {
-    "@quanxiaoxiao/datav": "^0.3.2",
-    "@quanxiaoxiao/http-request": "^0.57.0",
-    "@quanxiaoxiao/http-utils": "^0.27.0",
-    "@quanxiaoxiao/utils": "^0.15.0",
+    "@quanxiaoxiao/datav": "^0.4.0",
+    "@quanxiaoxiao/http-request": "^0.58.0",
+    "@quanxiaoxiao/http-utils": "^0.30.0",
+    "@quanxiaoxiao/utils": "^0.16.0",
     "ajv": "^8.17.1"
   }
 }
