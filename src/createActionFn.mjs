@@ -1,6 +1,7 @@
 import { select } from '@quanxiaoxiao/datav';
 import request from '@quanxiaoxiao/http-request';
 import {
+  decodeContentEncoding,
   decodeContentToJSON,
   parseHttpPath,
   parseHttpUrl,
@@ -86,7 +87,11 @@ export default (options, actionName, index) => {
       if (options.onlyStatusCodeWithOk !== false && responseItem.statusCode !== 200) {
         throw new Error(Buffer.concat(bufList).toString());
       }
-      const responseData = decodeContentToJSON(responseItem.body, responseItem.headers);
+
+      const responseData = options.parseResponseBody
+        ? options.parseResponseBody(decodeContentEncoding(responseItem.body, responseItem.headers))
+        : decodeContentToJSON(responseItem.body, responseItem.headers);
+
       if (responseBodyValidate && !responseBodyValidate(responseData)) {
         throw new Error(`\`${path}\` response body invalidate \`${JSON.stringify(responseBodyValidate.errors)}\` \`${JSON.stringify(responseData)}\``);
       }
