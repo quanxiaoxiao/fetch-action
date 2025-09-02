@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@quanxiaoxiao/datav": "^0.4.0",
-    "@quanxiaoxiao/http-request": "^0.64.0",
-    "@quanxiaoxiao/http-utils": "^0.35.0",
+    "@quanxiaoxiao/http-request": "^0.71.0",
+    "@quanxiaoxiao/http-utils": "^0.38.0",
     "@quanxiaoxiao/utils": "^0.17.0",
     "ajv": "^8.17.1"
   }
