@@ -1,22 +1,18 @@
 import createActionFn from './createActionFn.mjs';
 
 export const fetchActions = (arr, actionName) => {
-  const pipeline = [];
-  for (let i = 0; i < arr.length; i++) {
-    pipeline.push(createActionFn(arr[i], actionName, i));
-  }
+  const pipeline = arr.map((item, index) => createActionFn(item, actionName, index));
+
   return async (ctx) => {
     ctx._ = [];
+
     await pipeline.reduce(async (acc, action) => {
       await acc;
       const v = await action(ctx);
       ctx._.push(v);
     }, Promise.resolve);
-    const len = ctx._.length;
-    if (len === 0) {
-      return null;
-    }
-    return ctx._[len - 1];
+
+    return ctx._.length > 0 ? ctx._.at(-1) : null;
   };
 };
 
